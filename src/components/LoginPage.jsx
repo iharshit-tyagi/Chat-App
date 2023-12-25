@@ -1,7 +1,10 @@
 import React from "react";
-import { Link } from "react-router-dom";
+import { Link, Navigate } from "react-router-dom";
 
 const LoginPage = () => {
+  const handleClick = (e) => {
+    Navigate("/home");
+  };
   return (
     <div className="h-screen w-screen bg-blue-200 flex justify-center items-center">
       <form className=" flex gap-4 flex-col p-10 w-1/3 bg-white">
@@ -17,7 +20,11 @@ const LoginPage = () => {
           type="password"
           placeholder="Password"
         />
-        <button className=" border border-blue-200  text-center p-2">
+        <button
+          type="button"
+          onClick={handleClick}
+          className=" border border-blue-200  text-center p-2"
+        >
           Sign In
         </button>
         <div className=" flex gap-1">

@@ -2,7 +2,7 @@ import { useState } from "react";
 import LoginPage from "./components/LoginPage";
 import RegisterPage from "./components/RegisterPage";
 import { RouterProvider, createBrowserRouter } from "react-router-dom";
-
+import Home from "./components/Home";
 function App() {
   const appRoute = createBrowserRouter([
     {
@@ -12,6 +12,10 @@ function App() {
     {
       path: "/register",
       element: <RegisterPage />,
+    },
+    {
+      path: "/home",
+      element: <Home />,
     },
   ]);
   return (
