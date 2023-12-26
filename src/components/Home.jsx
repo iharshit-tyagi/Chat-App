@@ -9,9 +9,8 @@ const Home = () => {
         <div className=" bg-slate-500 col-span-4 ">
           <SideBar />
         </div>
-        <div className="col-span-8 ">
-          <Chat />
-        </div>
+
+        <Chat />
       </div>
     </div>
   );
