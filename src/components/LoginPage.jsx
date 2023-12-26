@@ -1,21 +1,27 @@
-import React from "react";
-import { Link, Navigate } from "react-router-dom";
+import React, { useRef } from "react";
+import { Link, Navigate, useNavigate } from "react-router-dom";
 
 const LoginPage = () => {
+  const navigate = useNavigate();
+  const emailId = useRef(null);
+  const password = useRef(null);
   const handleClick = (e) => {
-    Navigate("/home");
+    navigate("/home");
   };
+
   return (
     <div className="h-screen w-screen bg-blue-200 flex justify-center items-center">
       <form className=" flex gap-4 flex-col p-10 w-1/3 bg-white">
         <h2 className="mx-auto text-lg font-semibold ">NexTalk </h2>
         <p className="font-semibold">Login</p>
         <input
+          ref={emailId}
           className="p-2 focus:border-none border-b-2 focus:outline-none"
           type="email"
           placeholder="Email"
         />
         <input
+          ref={password}
           className="p-2 border-b-2 outline-none"
           type="password"
           placeholder="Password"
