@@ -1,33 +1,67 @@
 import React, { useRef } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import { auth } from "../firebase";
-import { createUserWithEmailAndPassword } from "firebase/auth";
+import { storage } from "../firebase";
+import { ref, uploadBytesResumable, getDownloadURL } from "firebase/storage";
+import { doc, setDoc } from "firebase/firestore";
+import { createUserWithEmailAndPassword, updateProfile } from "firebase/auth";
 const RegisterPage = () => {
   const navigate = useNavigate();
   const name = useRef(null);
   const email = useRef(null);
   const password = useRef(null);
-  const handleRegister = () => {
-    registerNewUser();
-  };
-  const registerNewUser = async () => {
-    createUserWithEmailAndPassword(
-      auth,
-      email.current.value,
-      password.current.value
-    )
-      .then((userCredential) => {
-        // Signed up
-        const user = userCredential.user;
-        console.log(user.email);
-        navigate("/home");
-        // ...
-      })
-      .catch((error) => {
-        const errorCode = error.code;
-        const errorMessage = error.message;
-        // ..
-      });
+  const avatar = useRef(null);
+
+  const handleRegister = async () => {
+    console.log(avatar.current.files[0]);
+    try {
+      const res = await createUserWithEmailAndPassword(
+        auth,
+        email.current.value,
+        password.current.value
+      );
+      // Signed up
+      const user = res.user;
+
+      //For creating the reference to the image which will be uploaded
+      const imageRef = ref(storage, `userAvatars/${name.current.value}`);
+
+      //Before Updating the profile , i need photo url as well , to update the url in firebase
+      const uploadTask = uploadBytesResumable(
+        imageRef,
+        avatar.current.files[0]
+      );
+
+      uploadTask.on(
+        (error) => {
+          alert("Image is not Uploaded");
+        },
+        () => {
+          alert("Image  Uploaded");
+          // Handle successful uploads on complete
+          // For instance, get the download URL: https://firebasestorage.googleapis.com/...
+          getDownloadURL(uploadTask.snapshot.ref).then(async (downloadURL) => {
+            console.log(downloadURL);
+            await updateProfile(auth.currentUser, {
+              displayName: name.current.value,
+              photoURL: downloadURL,
+            });
+          });
+        }
+      );
+
+      // await setDoc(doc(db, "users", res.user.uid), {
+      //   uid: res.user.uid,
+      //   displayName: res.user.displayName,
+      //   email: res.user.email,
+      //   photoURL: res.user.photoURL,
+      // });
+      console.log(res.user);
+      navigate("/home");
+    } catch (err) {
+      const errorCode = err.code;
+      const errorMessage = err.message;
+    }
   };
 
   return (
@@ -62,6 +96,7 @@ const RegisterPage = () => {
           <span>Choose an Avatar</span>
         </label>
         <input
+          ref={avatar}
           id="avatar"
           className="hidden"
           type="file"

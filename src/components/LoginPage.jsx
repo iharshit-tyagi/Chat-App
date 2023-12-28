@@ -2,7 +2,10 @@ import React, { useRef, useState } from "react";
 import { Link, Navigate, useNavigate } from "react-router-dom";
 import { signInWithEmailAndPassword } from "firebase/auth";
 import { auth } from "../firebase";
+import { addUser } from "../utils/userSlice";
+// import { useSelector, useDispatch } from "react-redux";
 const LoginPage = () => {
+  // const dispatch = useDispatch();
   const [errorMessage, setErrorMessage] = useState("");
   const navigate = useNavigate();
   const emailId = useRef(null);
@@ -19,6 +22,12 @@ const LoginPage = () => {
       .then((userCredential) => {
         // Signed in
         const user = userCredential.user;
+        // dispatch(
+        //   addUser({
+        //     email: emailId.current.value,
+        //     password: password.current.value,
+        //   })
+        // );
         navigate("/home");
         // ...
       })
