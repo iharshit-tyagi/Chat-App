@@ -3,6 +3,7 @@ import { Link, Navigate, useNavigate } from "react-router-dom";
 import { signInWithEmailAndPassword } from "firebase/auth";
 import { auth } from "../firebase";
 import { addUser } from "../utils/userSlice";
+import TrackAuthStatus from "./TrackAuthStatus";
 // import { useSelector, useDispatch } from "react-redux";
 const LoginPage = () => {
   // const dispatch = useDispatch();
@@ -39,6 +40,7 @@ const LoginPage = () => {
   };
   return (
     <div className="h-screen w-screen bg-blue-200 flex justify-center items-center">
+      <TrackAuthStatus />
       <form className=" flex gap-4 flex-col p-10 w-1/3 bg-white">
         <h2 className="mx-auto text-lg font-semibold ">NexTalk </h2>
         <p className="font-semibold">Login</p>

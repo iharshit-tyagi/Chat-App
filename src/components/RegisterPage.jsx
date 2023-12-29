@@ -5,6 +5,7 @@ import { storage } from "../firebase";
 import { ref, uploadBytesResumable, getDownloadURL } from "firebase/storage";
 import { doc, setDoc } from "firebase/firestore";
 import { createUserWithEmailAndPassword, updateProfile } from "firebase/auth";
+import TrackAuthStatus from "./TrackAuthStatus";
 const RegisterPage = () => {
   const navigate = useNavigate();
   const name = useRef(null);
@@ -13,7 +14,6 @@ const RegisterPage = () => {
   const avatar = useRef(null);
 
   const handleRegister = async () => {
-    console.log(avatar.current.files[0]);
     try {
       const res = await createUserWithEmailAndPassword(
         auth,
@@ -31,17 +31,15 @@ const RegisterPage = () => {
         imageRef,
         avatar.current.files[0]
       );
-
+      console.log(name.current.value);
       uploadTask.on(
         (error) => {
           alert("Image is not Uploaded");
         },
         () => {
-          alert("Image  Uploaded");
           // Handle successful uploads on complete
-          // For instance, get the download URL: https://firebasestorage.googleapis.com/...
           getDownloadURL(uploadTask.snapshot.ref).then(async (downloadURL) => {
-            console.log(downloadURL);
+            console.log(name.current.value);
             await updateProfile(auth.currentUser, {
               displayName: name.current.value,
               photoURL: downloadURL,
@@ -56,8 +54,6 @@ const RegisterPage = () => {
       //   email: res.user.email,
       //   photoURL: res.user.photoURL,
       // });
-      console.log(res.user);
-      navigate("/home");
     } catch (err) {
       const errorCode = err.code;
       const errorMessage = err.message;
@@ -66,6 +62,7 @@ const RegisterPage = () => {
 
   return (
     <div className="h-screen w-screen bg-blue-200 flex justify-center items-center">
+      <TrackAuthStatus />
       <form className=" flex gap-4 flex-col p-9 w-1/3 bg-white">
         <h2 className="mx-auto text-lg font-semibold ">NexTalk</h2>
         <p className="font-semibold"> Register</p>
