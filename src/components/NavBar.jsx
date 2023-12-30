@@ -2,11 +2,17 @@ import React from "react";
 import { useNavigate } from "react-router-dom";
 import { auth } from "../firebase";
 import { signOut } from "firebase/auth";
+import { useDispatch, useSelector } from "react-redux";
+import { removeUser } from "../utils/userSlice";
 const NavBar = () => {
+  const user = useSelector((store) => store.user);
+  console.log(user);
+  const dispatch = useDispatch();
   const navigate = useNavigate();
   const handleLogout = () => {
     signOut(auth)
       .then(() => {
+        dispatch(removeUser);
         navigate("/");
       })
       .catch((error) => {});
@@ -17,9 +23,9 @@ const NavBar = () => {
       <div className=" text-white flex gap-2 items-center">
         <img
           className="w-7 rounded-full object-cover"
-          src="https://cdn.icon-icons.com/icons2/2468/PNG/512/user_icon_149329.png"
+          src={user.user.photoURL}
         />
-        <p>Name</p>
+        <p>{user.user.displayName}</p>
         <button
           type="button"
           onClick={handleLogout}

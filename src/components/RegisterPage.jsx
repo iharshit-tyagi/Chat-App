@@ -1,4 +1,4 @@
-import React, { useRef } from "react";
+import React, { useRef, useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import { auth } from "../firebase";
 import { storage } from "../firebase";
@@ -6,13 +6,16 @@ import { ref, uploadBytesResumable, getDownloadURL } from "firebase/storage";
 import { doc, setDoc } from "firebase/firestore";
 import { createUserWithEmailAndPassword, updateProfile } from "firebase/auth";
 import TrackAuthStatus from "./TrackAuthStatus";
+import { db } from "../firebase";
 const RegisterPage = () => {
+  const [name, setName] = useState("");
   const navigate = useNavigate();
-  const name = useRef(null);
   const email = useRef(null);
   const password = useRef(null);
   const avatar = useRef(null);
-
+  const handleChange = (e) => {
+    setName(e.target.value);
+  };
   const handleRegister = async () => {
     try {
       const res = await createUserWithEmailAndPassword(
@@ -24,14 +27,14 @@ const RegisterPage = () => {
       const user = res.user;
 
       //For creating the reference to the image which will be uploaded
-      const imageRef = ref(storage, `userAvatars/${name.current.value}`);
+      const imageRef = ref(storage, `userAvatars/${name}`);
 
       //Before Updating the profile , i need photo url as well , to update the url in firebase
       const uploadTask = uploadBytesResumable(
         imageRef,
         avatar.current.files[0]
       );
-      console.log(name.current.value);
+
       uploadTask.on(
         (error) => {
           alert("Image is not Uploaded");
@@ -39,38 +42,39 @@ const RegisterPage = () => {
         () => {
           // Handle successful uploads on complete
           getDownloadURL(uploadTask.snapshot.ref).then(async (downloadURL) => {
-            console.log(name.current.value);
-            await updateProfile(auth.currentUser, {
-              displayName: name.current.value,
+            await updateProfile(res.user, {
+              displayName: name,
               photoURL: downloadURL,
             });
+            await setDoc(doc(db, "users", res.user.uid), {
+              uid: res.user.uid,
+              displayName: name,
+              email: res.user.email,
+              photoURL: user.photoURL,
+            });
+            await setDoc(doc(db, "userChats", res.user.uid), {});
           });
         }
       );
-
-      // await setDoc(doc(db, "users", res.user.uid), {
-      //   uid: res.user.uid,
-      //   displayName: res.user.displayName,
-      //   email: res.user.email,
-      //   photoURL: res.user.photoURL,
-      // });
     } catch (err) {
       const errorCode = err.code;
       const errorMessage = err.message;
+      alert(errorMessage);
     }
   };
 
   return (
     <div className="h-screen w-screen bg-blue-200 flex justify-center items-center">
-      <TrackAuthStatus />
+      {/* <TrackAuthStatus /> */}
       <form className=" flex gap-4 flex-col p-9 w-1/3 bg-white">
         <h2 className="mx-auto text-lg font-semibold ">NexTalk</h2>
         <p className="font-semibold"> Register</p>
         <input
-          ref={name}
+          onChange={handleChange}
           className="p-1 focus:border-none border-b-2 focus:outline-none"
           type="text"
           placeholder="Display Name"
+          // value={name}
         />
 
         <input
