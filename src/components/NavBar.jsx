@@ -6,7 +6,6 @@ import { useDispatch, useSelector } from "react-redux";
 import { removeUser } from "../utils/userSlice";
 const NavBar = () => {
   const user = useSelector((store) => store.user);
-  console.log(user);
   const dispatch = useDispatch();
   const navigate = useNavigate();
   const handleLogout = () => {
