@@ -8,7 +8,7 @@ const SideBar = () => {
     <>
       <NavBar />
       <Search />
-      {/* /  <Chats /> */}
+      <Chats />
     </>
   );
 };

@@ -1,8 +1,10 @@
 import React from "react";
 import Message from "./Message";
 import Input from "./Input";
-
+import { useSelector, useDispatch } from "react-redux";
 const Chat = () => {
+  const chatInfo = useSelector((store) => store.chat.chatInfo);
+  console.log(chatInfo);
   return (
     <div className="col-span-8 ">
       <div className=" bg-gray-600 items-center px-4 flex justify-between   h-14 ">

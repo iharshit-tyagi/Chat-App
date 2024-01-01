@@ -23,9 +23,7 @@ const LoginPage = () => {
     )
       .then((userCredential) => {
         // Signed in
-        const user = userCredential.user;
-        dispatch(addUser(user));
-        navigate("/home");
+        // navigate("/home");
         // ...
       })
       .catch((error) => {
