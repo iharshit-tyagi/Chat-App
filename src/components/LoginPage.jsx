@@ -2,10 +2,9 @@ import React, { useRef, useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import { signInWithEmailAndPassword } from "firebase/auth";
 import { auth } from "../firebase";
-import { addUser } from "../utils/userSlice";
+
 import TrackAuthStatus from "./TrackAuthStatus";
 import { useDispatch } from "react-redux";
-// import { useSelector, useDispatch } from "react-redux";
 const LoginPage = () => {
   const dispatch = useDispatch();
   const [errorMessage, setErrorMessage] = useState("");

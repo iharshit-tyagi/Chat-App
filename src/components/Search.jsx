@@ -13,7 +13,6 @@ import {
 } from "firebase/firestore";
 import { db } from "../firebase";
 import { useDispatch, useSelector } from "react-redux";
-import { addSearchResult, clearSearchResults } from "../utils/userSlice";
 
 const Search = () => {
   const [userQuery, setQuery] = useState("");
@@ -25,7 +24,7 @@ const Search = () => {
   const q = query(usersRef, where("displayName", "==", userQuery));
   const handleSearch = async () => {
     const querySnapshot = await getDocs(q);
-    // dispatch(addSearchResult(querySnapshot.docs));
+
     setSearchResultsState(querySnapshot.docs);
 
     // querySnapshot.forEach((doc) => {
