@@ -1,8 +1,14 @@
 import React from "react";
 import { useSelector } from "react-redux";
+import { useEffect, useRef } from "react";
+
 const Message = ({ message }) => {
   const user = useSelector((store) => store.user.user);
   const chatInfo = useSelector((store) => store.chat.chatInfo);
+  const ref = useRef(null);
+  useEffect(() => {
+    ref.current?.scrollIntoView({ behavior: "smooth" });
+  }, [message]);
 
   return (
     <div className="flex  gap-10 mt-2 ">
