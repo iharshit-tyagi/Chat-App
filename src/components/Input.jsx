@@ -72,6 +72,7 @@ const Input = () => {
         type="text"
         placeholder="Type something..."
         onChange={(e) => setText(e.target.value)}
+        value={text}
       />
       <div className="flex gap-2 pr-3 items-center">
         <input

@@ -20,6 +20,7 @@ const Chats = () => {
     user && getChats();
   }, [user.uid]);
   const handleChatSelect = (chatId, userInfo) => {
+    dispatch(clearChatInfo());
     dispatch(
       addChatInfo({
         userInfo,
@@ -28,7 +29,7 @@ const Chats = () => {
     );
   };
 
-  if (chats.length === 0) return null;
+  if (chats?.length === 0) return null;
 
   const chat = Object.entries(chats);
   return (
@@ -36,20 +37,20 @@ const Chats = () => {
       {Object.entries(chats)
         .sort((a, b) => b[1].date - a[1].date)
         .map((chat) => {
-          console.log(chat[1]?.lastMessage.text);
+          console.log(chat[1]?.lastMessage?.text);
           return (
             <div
               key={chat[0]}
-              className="text-white flex gap-11 pl-4 mb-4 shadow-sm"
+              className="text-white text-lg flex gap-11 pb-2 pl-4 mb-4 h-14 shadow-sm shadow-white"
               onClick={() => handleChatSelect(chat[0], chat[1].userInfo)}
             >
               <img
-                className="w-7 rounded-full object-cover"
+                className="w-11 border-white rounded-full object-cover"
                 src={chat[1].userInfo.photoURL}
               />
               <div>
                 <p className=" font-semibold">{chat[1].userInfo.displayName}</p>
-                <p>{chat[1]?.lastMessage.text}</p>
+                <p>{chat[1]?.lastMessage?.text}</p>
               </div>
             </div>
           );

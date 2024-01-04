@@ -85,7 +85,7 @@ const Search = () => {
         placeholder="Find User"
         onChange={(e) => setQuery(e.target.value)}
         onKeyDown={handleKeyDown}
-        className="w-full px-3 py-1"
+        className="w-full px-3 py-1 text-lg border-white border bg-gray-400 text-white placeholder:text-white"
         value={userQuery}
         // onFocus={() => {
         //   setShowSearchResults(true);

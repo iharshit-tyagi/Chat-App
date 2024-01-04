@@ -3,10 +3,10 @@ import React from "react";
 const UserChat = (props) => {
   const { photoURL, displayName, showMessage } = props;
   return (
-    <div className="text-white flex gap-11 pl-4 mb-4 shadow-sm">
-      <img className="w-7 rounded-full object-cover" src={photoURL} />
+    <div className="ext-white text-lg flex gap-11 pb-2 pl-4  h-14 shadow-sm shadow-white">
+      <img className="w-10 rounded-full object-cover" src={photoURL} />
       <div>
-        <p className=" font-semibold">{displayName}</p>
+        <p className=" text-white font-semibold">{displayName}</p>
         {showMessage && <p>Hello </p>}
       </div>
     </div>

@@ -15,15 +15,15 @@ const NavBar = () => {
   };
   if (!user) return null;
   return (
-    <div className="flex h-14 items-center justify-between p-2 bg-orange-400 ">
+    <div className="flex h-16 items-center justify-between p-2 bg-black ">
       <h2 className="text-lg font-semibold text-white">NexTalk</h2>
       <div className=" text-white flex gap-2 items-center">
-        <img className="w-7 rounded-full object-cover" src={user?.photoURL} />
-        <p>{user?.displayName}</p>
+        <img className="w-10 rounded-full object-cover" src={user?.photoURL} />
+        <p className="text-xl">{user?.displayName}</p>
         <button
           type="button"
           onClick={handleLogout}
-          className="border border-gray-100 rounded-md p-1 text-center "
+          className="border text-lg border-gray-100 rounded-md p-1 text-center "
         >
           Log Out
         </button>

@@ -4,6 +4,7 @@ import { useNavigate } from "react-router-dom";
 import { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { addUser, removeUser } from "../utils/userSlice";
+import { clearChatInfo } from "../utils/chatSlice";
 const TrackAuthStatus = () => {
   const navigate = useNavigate();
   const dispatch = useDispatch();
@@ -28,6 +29,7 @@ const TrackAuthStatus = () => {
         // ...
         navigate("/");
         dispatch(removeUser());
+        dispatch(clearChatInfo());
       }
     });
 
