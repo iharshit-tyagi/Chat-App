@@ -32,14 +32,14 @@ const LoginPage = () => {
       });
   };
   return (
-    <div className="h-screen w-screen bg-blue-200 flex justify-center items-center">
+    <div className="h-screen w-screen bg-black flex justify-center items-center">
       <TrackAuthStatus />
-      <form className=" flex gap-4 flex-col p-10 w-1/3 bg-white">
+      <form className=" flex gap-4 flex-col p-10 w-1/3 rounded-md bg-gray-300">
         <h2 className="mx-auto text-lg font-semibold ">NexTalk </h2>
         <p className="font-semibold">Login</p>
         <input
           ref={emailId}
-          className="p-2 focus:border-none border-b-2 focus:outline-none"
+          className="p-2  focus:border-none focus:outline-none"
           type="email"
           placeholder="Email"
         />
@@ -53,7 +53,7 @@ const LoginPage = () => {
         <button
           type="button"
           onClick={handleSignin}
-          className=" border border-blue-200  text-center p-2"
+          className=" border border-blue-200 bg-slate-400 text-lg  text-center p-2"
         >
           Sign In
         </button>
