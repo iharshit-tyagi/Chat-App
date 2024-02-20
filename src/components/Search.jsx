@@ -24,7 +24,6 @@ const Search = () => {
   const q = query(usersRef, where("displayName", "==", userQuery));
   const handleSearch = async () => {
     const querySnapshot = await getDocs(q);
-
     setSearchResultsState(querySnapshot.docs);
 
     // querySnapshot.forEach((doc) => {
@@ -85,21 +84,22 @@ const Search = () => {
         placeholder="Find User"
         onChange={(e) => setQuery(e.target.value)}
         onKeyDown={handleKeyDown}
-        className="w-full px-3 py-1 text-lg border-white border bg-gray-400 text-white placeholder:text-white"
+        className="w-full px-3 py-2 mt-2 text-lg border border-gray-700 bg-gray-800 text-white placeholder-gray-500 focus:outline-none focus:border-blue-500"
         value={userQuery}
-        // onFocus={() => {
-        //   setShowSearchResults(true);
-        // }}
-        // onBlur={() => {
-        //   setShowSearchResults(false);
-        // }}
+        onFocus={() => {
+          setShowSearchResults(true);
+        }}
+        onBlur={() => {
+          setShowSearchResults(false);
+        }}
       />
       {searchResultsState.length != 0 && (
-        <div>
+        <div className="   mt-2 bg-gray-800 border  border-gray-700 rounded-lg  z-10 max-h-48 overflow-y-auto">
           {searchResultsState.map((user) => (
             <div
               key={user._document.data.value.mapValue.fields.uid.stringValue}
               onClick={() => handleSelect(user)}
+              className="p-1 cursor-pointer   "
             >
               <UserChat
                 photoURL={
@@ -109,7 +109,7 @@ const Search = () => {
                   user._document.data.value.mapValue.fields.displayName
                     .stringValue
                 }
-                showMessage={false}
+                showMessage={true}
               />
             </div>
           ))}

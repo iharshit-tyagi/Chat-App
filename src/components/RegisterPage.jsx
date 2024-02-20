@@ -24,7 +24,7 @@ const RegisterPage = () => {
         password.current.value
       );
       // Signed up
-      const user = res.user;
+      const user = res?.user;
 
       //For creating the reference to the image which will be uploaded
       const imageRef = ref(storage, `userAvatars/${name}`);
@@ -42,17 +42,17 @@ const RegisterPage = () => {
         () => {
           // Handle successful uploads on complete
           getDownloadURL(uploadTask.snapshot.ref).then(async (downloadURL) => {
-            await updateProfile(res.user, {
+            await updateProfile(res?.user, {
               displayName: name,
               photoURL: downloadURL,
             });
-            await setDoc(doc(db, "users", res.user.uid), {
-              uid: res.user.uid,
+            await setDoc(doc(db, "users", res?.user?.uid), {
+              uid: res.user?.uid,
               displayName: name,
               email: res.user.email,
               photoURL: user.photoURL,
             });
-            await setDoc(doc(db, "userChats", res.user.uid), {});
+            await setDoc(doc(db, "userChats", res?.user?.uid), {});
           });
         }
       );
@@ -65,7 +65,7 @@ const RegisterPage = () => {
 
   return (
     <div className="h-screen w-screen bg-gray-900 flex justify-center items-center">
-      {/* <TrackAuthStatus /> */}
+      <TrackAuthStatus />
       <form className=" flex gap-4 flex-col p-9 w-1/3 bg-gray-300 ">
         <h2 className="mx-auto text-lg font-semibold ">NexTalk</h2>
         <p className="font-semibold"> Register</p>
