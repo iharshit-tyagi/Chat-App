@@ -64,9 +64,9 @@ const RegisterPage = () => {
   };
 
   return (
-    <div className="h-screen w-screen bg-blue-200 flex justify-center items-center">
+    <div className="h-screen w-screen bg-gray-900 flex justify-center items-center">
       {/* <TrackAuthStatus /> */}
-      <form className=" flex gap-4 flex-col p-9 w-1/3 bg-white">
+      <form className=" flex gap-4 flex-col p-9 w-1/3 bg-gray-300 ">
         <h2 className="mx-auto text-lg font-semibold ">NexTalk</h2>
         <p className="font-semibold"> Register</p>
         <input
@@ -106,7 +106,7 @@ const RegisterPage = () => {
         <button
           type="button"
           onClick={handleRegister}
-          className=" border border-blue-200  text-center p-2"
+          className=" rounded-sm bg-slate-400 text-lg text-center p-2"
         >
           Register
         </button>

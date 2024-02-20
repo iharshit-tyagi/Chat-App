@@ -32,7 +32,7 @@ const LoginPage = () => {
       });
   };
   return (
-    <div className="h-screen w-screen bg-black flex justify-center items-center">
+    <div className="h-screen w-screen bg-gray-900 flex justify-center items-center">
       <TrackAuthStatus />
       <form className=" flex gap-4 flex-col p-10 w-1/3 rounded-md bg-gray-300">
         <h2 className="mx-auto text-lg font-semibold ">NexTalk </h2>
@@ -53,7 +53,7 @@ const LoginPage = () => {
         <button
           type="button"
           onClick={handleSignin}
-          className=" border border-blue-200 bg-slate-400 text-lg  text-center p-2"
+          className=" rounded-sm bg-slate-400 text-lg  text-center p-2"
         >
           Sign In
         </button>
