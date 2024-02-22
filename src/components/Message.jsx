@@ -41,6 +41,7 @@ const Message = ({ message }) => {
         }
       >
         <p>{message?.text}</p>
+        {message?.img && <img className="w- h-30" src={message.img} />}
       </div>
     </div>
   );
