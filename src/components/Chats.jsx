@@ -20,7 +20,7 @@ const Chats = () => {
     user && getChats();
   }, [user?.uid]);
   const handleChatSelect = (chatId, userInfo) => {
-    dispatch(clearChatInfo());
+    // dispatch(clearChatInfo());
     dispatch(
       addChatInfo({
         userInfo,

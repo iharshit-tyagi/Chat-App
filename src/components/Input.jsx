@@ -66,9 +66,9 @@ const Input = () => {
     setImg(null);
   };
   return (
-    <div className="flex justify-between  ">
+    <div className="flex justify-between items-center bg-gray-800 p-2 rounded-lg">
       <input
-        className="p-2 focus:border-none h-full text-lg focus:outline-none"
+        className="p-2 text-white bg-gray-800 focus:border-none h-full text-lg focus:outline-none flex-grow"
         type="text"
         placeholder="Type something..."
         onChange={(e) => setText(e.target.value)}
@@ -77,18 +77,23 @@ const Input = () => {
       <div className="flex gap-2 pr-3 items-center">
         <input
           type="file"
-          className="hidden"
+          className="hidden focus:outline-none focus:ring"
           id="attachment"
           onChange={(e) => setImg(e.target.files[0])}
         />
         <label htmlFor="attachment">
           <img
-            className="w-6"
+            className="w-6 cursor-pointer"
             src="https://cdn-icons-png.flaticon.com/512/4700/4700815.png"
+            alt="Attachment Icon"
           />
         </label>
-
-        <button onClick={handleSend}>Send</button>
+        <button
+          className="px-4 py-2 rounded-md bg-blue-500 text-white hover:bg-blue-600"
+          onClick={handleSend}
+        >
+          Send
+        </button>
       </div>
     </div>
   );

@@ -30,7 +30,7 @@ const Message = ({ message }) => {
               : chatInfo.userInfo.photoURL
           }
         />
-        <p className="text-sm">{message.date.toDate().toLocaleString()}</p>
+        {/* <p className="text-sm">{message.date.toDate().toLocaleString()}</p> */}
       </div>
       {/* Message  Content */}
       <div

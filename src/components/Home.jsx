@@ -3,6 +3,7 @@ import SideBar from "./SideBar";
 import Chat from "./Chat";
 import TrackAuthStatus from "./TrackAuthStatus";
 import { useDispatch, useSelector } from "react-redux";
+import Input from "./Input";
 const Home = () => {
   const user = useSelector((store) => store.user);
   if (!user) return <h2>Loading</h2>;

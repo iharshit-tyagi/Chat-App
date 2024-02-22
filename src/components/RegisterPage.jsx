@@ -65,7 +65,7 @@ const RegisterPage = () => {
 
   return (
     <div className="h-screen w-screen bg-gray-900 flex justify-center items-center">
-      <TrackAuthStatus />
+      {/* <TrackAuthStatus /> */}
       <form className=" flex gap-4 flex-col p-9 w-1/3 bg-gray-300 ">
         <h2 className="mx-auto text-lg font-semibold ">NexTalk</h2>
         <p className="font-semibold"> Register</p>
